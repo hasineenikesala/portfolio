@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { GlassCard } from "./GlassCard";
-import { Mail, Phone, MapPin, GraduationCap, Building } from "lucide-react";
+import { Download } from "lucide-react";
 
 export function About() {
   return (
@@ -10,7 +9,7 @@ export function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono">
             <span className="text-primary mr-2">&gt;</span>
@@ -18,59 +17,73 @@ export function About() {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <GlassCard delay={0.1}>
-            <h3 className="text-xl font-bold mb-6 text-secondary flex items-center">
-              <span className="bg-secondary/20 p-2 rounded-md mr-3">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinelinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </span>
-              Contact Nodes
-            </h3>
-            
-            <ul className="space-y-4 font-mono text-sm md:text-base">
-              <li className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors group">
-                <Mail className="w-5 h-5 text-primary group-hover:text-glow-primary" />
-                <span>mgt2022267@mgt.rjt.ac.lk</span>
-              </li>
-              <li className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors group">
-                <Mail className="w-5 h-5 text-primary group-hover:text-glow-primary" />
-                <span>hasineenikesala@gmail.com</span>
-              </li>
-              <li className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors group">
-                <Phone className="w-5 h-5 text-primary group-hover:text-glow-primary" />
-                <span>+94 76 299 4193</span>
-              </li>
-              <li className="flex items-center space-x-3 text-muted-foreground hover:text-foreground transition-colors group">
-                <Building className="w-5 h-5 text-primary group-hover:text-glow-primary" />
-                <span>Rajarata University of Sri Lanka (RUSL)</span>
-              </li>
-            </ul>
-          </GlassCard>
+        {/* White/light card floating over dark background */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 p-10 relative overflow-hidden"
+          style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.4), 0 0 40px rgba(56,189,248,0.06)" }}
+        >
+          {/* Top accent bar */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-          <GlassCard delay={0.2}>
-            <h3 className="text-xl font-bold mb-6 text-secondary flex items-center">
-              <span className="bg-secondary/20 p-2 rounded-md mr-3">
-                <GraduationCap className="w-5 h-5" />
-              </span>
-              Education Core
-            </h3>
-            
-            <div className="relative pl-6 border-l border-white/10 space-y-8">
-              <div className="relative">
-                <span className="absolute -left-[29px] top-1 w-3 h-3 rounded-full bg-primary box-glow-primary" />
-                <h4 className="text-lg font-bold text-foreground">BSc Honours in Information Systems</h4>
-                <p className="text-secondary font-mono text-sm mb-2">Rajarata University of Sri Lanka | Feb 2023 – Present</p>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="px-2 py-1 text-xs rounded bg-card border border-white/5 font-mono">GPA: 3.49/4.00</span>
-                  <span className="px-2 py-1 text-xs rounded bg-card border border-white/5 font-mono text-primary">Expected 2027</span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Relevant coursework: Software Engineering, OOP, DBMS, DSA, Web Development, System Analysis
-                </p>
-              </div>
-            </div>
-          </GlassCard>
-        </div>
+          {/* About Me header */}
+          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">About Me</h3>
+
+          {/* Summary */}
+          <p className="text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto mb-10 text-sm md:text-base">
+            Enthusiastic Information Systems undergraduate with practical experience in full-stack web development, software design, and database management. Skilled in modern web technologies including React.js, Node.js, Express.js, Spring Boot, PHP, MySQL, and MongoDB. Developed multiple academic and personal projects demonstrating strong problem-solving, teamwork, and software development skills.
+          </p>
+
+          {/* 3-column data blocks */}
+          <div className="grid md:grid-cols-3 gap-4 mb-10">
+            {[
+              {
+                label: "EDUCATION",
+                title: "BSc in Information Systems",
+                sub: "Rajarata University of Sri Lanka"
+              },
+              {
+                label: "ACADEMIC STATUS",
+                title: "Year 3 of 4",
+                sub: "GPA: 3.49/4.0 · Exp. 2027"
+              },
+              {
+                label: "EXPERIENCE",
+                title: "Web Developer Intern",
+                sub: "Devora (Pvt) Ltd. (Nov 2025 – Feb 2026)"
+              }
+            ].map((block, i) => (
+              <motion.div
+                key={block.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-xl border border-white/10 bg-black/20 p-5 text-center hover:border-primary/40 transition-colors"
+              >
+                <div className="text-primary text-[10px] font-mono font-bold tracking-widest mb-3 uppercase">{block.label}</div>
+                <div className="text-foreground font-bold text-sm mb-1">{block.title}</div>
+                <div className="text-muted-foreground text-xs">{block.sub}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Get My CV CTA */}
+          <div className="flex justify-center">
+            <a
+              href="/Hasini_Nikesala_CV.pdf"
+              download
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-foreground text-background font-bold text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 active:scale-95"
+              style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.3)" }}
+            >
+              <Download className="w-4 h-4" />
+              Get My CV
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
