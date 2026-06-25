@@ -4,72 +4,92 @@ import {
   Code2, Database, Globe, Server, Terminal, GitBranch,
   Cloud, Layers, Cpu, FileCode, Braces, Box,
   Coffee, Webhook, Circle, Hash, Monitor, Settings,
-  Wrench, Network, Shield
+  Wrench, Network, Shield, Palette, Layout, Figma
 } from "lucide-react";
 
 const categories = [
   {
     label: "Programming Languages",
+    color: "#38bdf8",
     skills: [
       { name: "Java", icon: Coffee, color: "#f89820" },
       { name: "PHP", icon: FileCode, color: "#777bb4" },
       { name: "Python", icon: Terminal, color: "#3776ab" },
       { name: "TypeScript", icon: Braces, color: "#3178c6" },
       { name: "JavaScript", icon: Code2, color: "#f7df1e" },
-      { name: "SQL", icon: Database, color: "#00df9a" },
+      { name: "SQL", icon: Database, color: "#38bdf8" },
       { name: "HTML5", icon: Globe, color: "#e34f26" },
       { name: "CSS3", icon: Layers, color: "#1572b6" },
     ]
   },
   {
-    label: "Frontend Engineering",
+    label: "Web Development",
+    color: "#60d9ff",
     skills: [
       { name: "React.js", icon: Circle, color: "#61dafb" },
       { name: "Angular", icon: Circle, color: "#dd0031" },
-      { name: "Tailwind CSS", icon: Webhook, color: "#38bdf8" },
+      { name: "HTML5", icon: Globe, color: "#e34f26" },
+      { name: "CSS3", icon: Layers, color: "#1572b6" },
+      { name: "Tailwind", icon: Webhook, color: "#38bdf8" },
+      { name: "JavaScript", icon: Code2, color: "#f7df1e" },
       { name: "Bootstrap", icon: Layers, color: "#7952b3" },
-      { name: "JavaScript ES6+", icon: Code2, color: "#f7df1e" },
-      { name: "DOM", icon: Monitor, color: "#00df9a" },
     ]
   },
   {
-    label: "Backend & API Engineering",
+    label: "Backend & Frameworks",
+    color: "#38bdf8",
     skills: [
       { name: "Node.js", icon: Server, color: "#339933" },
       { name: "Express.js", icon: Box, color: "#f8fafc" },
       { name: "Spring Boot", icon: Cpu, color: "#6db33f" },
-      { name: "REST API", icon: Network, color: "#38bdf8" },
-      { name: "MVC", icon: Settings, color: "#00df9a" },
+      { name: "REST APIs", icon: Network, color: "#38bdf8" },
+      { name: "MVC", icon: Settings, color: "#60d9ff" },
+      { name: "Hibernate", icon: Database, color: "#59666c" },
+      { name: "JPA", icon: Database, color: "#38bdf8" },
     ]
   },
   {
-    label: "Databases & ORM",
+    label: "Databases",
+    color: "#60d9ff",
     skills: [
       { name: "MySQL", icon: Database, color: "#4479a1" },
       { name: "MongoDB", icon: Hash, color: "#47a248" },
-      { name: "Hibernate", icon: Database, color: "#59666c" },
-      { name: "JPA", icon: Database, color: "#00df9a" },
-      { name: "NoSQL", icon: Hash, color: "#38bdf8" },
     ]
   },
   {
-    label: "Tools & Platforms",
+    label: "UI/UX & Design",
+    color: "#38bdf8",
+    skills: [
+      { name: "Figma", icon: Figma, color: "#f24e1e" },
+      { name: "Illustrator", icon: Palette, color: "#ff9a00" },
+      { name: "Photoshop", icon: Layout, color: "#31a8ff" },
+    ]
+  },
+  {
+    label: "IDEs & Tools",
+    color: "#60d9ff",
     skills: [
       { name: "Git", icon: GitBranch, color: "#f05032" },
       { name: "GitHub", icon: GitBranch, color: "#f8fafc" },
-      { name: "Postman", icon: Network, color: "#ff6c37" },
       { name: "VS Code", icon: Monitor, color: "#007acc" },
+      { name: "Postman", icon: Network, color: "#ff6c37" },
       { name: "IntelliJ", icon: Wrench, color: "#fe315d" },
-      { name: "AWS", icon: Cloud, color: "#ff9900" },
+      { name: ".NET", icon: Box, color: "#512bd4" },
       { name: "Linux OS", icon: Terminal, color: "#fcc624" },
-      { name: "Maltego", icon: Shield, color: "#00df9a" },
+      { name: "Maltego", icon: Shield, color: "#38bdf8" },
     ]
   }
 ];
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 relative bg-black/20">
+    <section id="skills" className="py-24 relative bg-black/20 overflow-hidden">
+      {/* Subtle background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      </div>
+
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,28 +99,33 @@ export function Skills() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono">
             <span className="text-primary mr-2">&gt;</span>
-            <span className="text-glow-primary border-b-2 border-primary pb-1 inline-block">TECH.STACK</span>
+            <span className="text-glow-primary border-b-2 border-primary pb-1 inline-block">TECH.ARSENAL</span>
           </h2>
+          <p className="text-muted-foreground font-mono text-sm mt-2 ml-6">// 6 categories · {categories.reduce((a, c) => a + c.skills.length, 0)} technologies</p>
         </motion.div>
 
-        <div className="space-y-16">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {categories.map((cat, catIdx) => (
             <motion.div
               key={cat.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: catIdx * 0.1 }}
+              transition={{ duration: 0.5, delay: catIdx * 0.08 }}
+              className="glass-panel rounded-xl p-6 relative overflow-hidden"
+              style={{ borderColor: `${cat.color}20` }}
             >
-              <div className="flex items-center gap-4 mb-8">
-                <span className="text-xs font-mono text-secondary border border-secondary/30 px-3 py-1 rounded-full bg-secondary/5">
+              {/* Card top accent */}
+              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${cat.color}, transparent)` }} />
+
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-[10px] font-mono border px-2 py-0.5 rounded-full" style={{ color: cat.color, borderColor: `${cat.color}40`, backgroundColor: `${cat.color}10` }}>
                   {String(catIdx + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-base md:text-lg font-mono font-bold text-foreground/80">{cat.label}</h3>
-                <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
+                <h3 className="text-sm font-mono font-bold text-foreground/80">{cat.label}</h3>
               </div>
 
-              <div className="flex flex-wrap gap-6 md:gap-10">
+              <div className="flex flex-wrap gap-5">
                 {cat.skills.map((skill, index) => {
                   const Icon = skill.icon;
                   return (
@@ -108,17 +133,17 @@ export function Skills() {
                       key={skill.name}
                       initial={{ opacity: 0, scale: 0.5 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-30px" }}
-                      transition={{ duration: 0.35, delay: index * 0.04 }}
-                      className="flex flex-col items-center group"
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: index * 0.04 }}
+                      className="flex flex-col items-center group cursor-default"
                     >
-                      <NeonRing className="w-14 h-14 md:w-18 md:h-18 mb-3 transition-transform group-hover:scale-110">
+                      <NeonRing className="w-12 h-12 mb-2 transition-transform group-hover:scale-110">
                         <Icon
-                          className="w-7 h-7 md:w-8 md:h-8 transition-all duration-300 group-hover:scale-110"
+                          className="w-6 h-6 transition-all duration-300"
                           style={{ color: skill.color }}
                         />
                       </NeonRing>
-                      <span className="font-mono text-[10px] md:text-xs text-muted-foreground group-hover:text-primary transition-colors text-center max-w-[70px]">
+                      <span className="font-mono text-[9px] text-muted-foreground group-hover:text-primary transition-colors text-center max-w-[56px] leading-tight">
                         {skill.name}
                       </span>
                     </motion.div>

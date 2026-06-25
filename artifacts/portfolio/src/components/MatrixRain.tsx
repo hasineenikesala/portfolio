@@ -6,41 +6,36 @@ export function MatrixRain() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const resize = () => {
-      canvas.width = 180;
-      canvas.height = window.innerHeight;
-    };
-    resize();
+    canvas.width = 160;
+    canvas.height = window.innerHeight;
 
-    const fontSize = 13;
+    const fontSize = 12;
     const cols = Math.floor(canvas.width / fontSize);
     const drops: number[] = Array(cols).fill(1);
 
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノ</>{}[]()#$%^&*";
+    const chars = "01アイウエオカキクケコ</>{}[]#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef";
 
     let animId: number;
 
     const draw = () => {
-      ctx.fillStyle = "rgba(8, 15, 30, 0.06)";
+      ctx.fillStyle = "rgba(6, 13, 26, 0.07)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < drops.length; i++) {
         const char = chars[Math.floor(Math.random() * chars.length)];
         const y = drops[i] * fontSize;
 
-        // Lead character glows bright
-        if (drops[i] * fontSize < canvas.height * 0.1) {
+        if (drops[i] < 3) {
           ctx.fillStyle = "#ffffff";
-          ctx.shadowColor = "#00df9a";
-          ctx.shadowBlur = 8;
+          ctx.shadowColor = "#38bdf8";
+          ctx.shadowBlur = 10;
         } else {
-          const alpha = Math.random() * 0.5 + 0.5;
-          ctx.fillStyle = `rgba(0, 223, 154, ${alpha})`;
-          ctx.shadowColor = "#00df9a";
+          const alpha = Math.random() * 0.5 + 0.4;
+          ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+          ctx.shadowColor = "#38bdf8";
           ctx.shadowBlur = 4;
         }
 
@@ -58,12 +53,11 @@ export function MatrixRain() {
     };
 
     draw();
-
     return () => cancelAnimationFrame(animId);
   }, []);
 
   return (
-    <div className="fixed right-0 top-0 h-full w-[180px] pointer-events-none z-0 opacity-30">
+    <div className="fixed right-0 top-0 h-full pointer-events-none z-0" style={{ width: 160, opacity: 0.25 }}>
       <canvas ref={canvasRef} className="h-full" />
     </div>
   );

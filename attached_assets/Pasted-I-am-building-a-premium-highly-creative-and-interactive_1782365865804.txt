@@ -1,0 +1,63 @@
+I am building a premium, highly creative, and interactive HTML/CSS/JS single-page developer portfolio website. It must look futuristic, advanced, and visually stunning. This is a pure client-side frontend setup (`index.html`, `style.css`, and `script.js`) to guarantee 100% flawless deployment on Vercel under my project domain 'https://hasini-nikesala.vercel.app' with ZERO compilation errors.
+
+### 🚨 STRICTOR COLOR ACCENT & IDENTITY RULES
+- **Primary Color Theme (Exact Screenshot Match):** Dominated exclusively by a rich deep space dark navy blue gradient framework (`#0f172a` slate/navy) paired with electric neon blue (`#38bdf8`) and glowing cyan accents. Avoid green tones entirely except for a subtle notification overlay on form submission.
+- **Identity Enforcement:** All names, copyrights, and watermarks MUST strictly be "Hasini Nikesala". Do NOT use the name "Jithmi" anywhere on this website.
+
+Please synthesize and include ALL data points and accurate visual blueprints from my master architecture context into this single page layout:
+
+### 1. PERSONAL & ACADEMIC INFO (HERO BLOCK IDENTITY)
+- **Name:** Hasini Nikesala
+- **Title:** Intern Software Engineer | Full Stack Developer (Rajarata University of Sri Lanka - RJT)
+- **Academic Standing:** BSc in Information Systems (Expected 2027), Cumulative GPA: 3.49 / 4.0
+- **Contact Details:** hasineenikesala@gmail.com | +94 76 299 4193 | Anuradhapura, Sri Lanka
+- **Social Nodes:** GitHub (https://github.com/hasineenikesala), LinkedIn (linkedin.com/in/hasini-nikesala)
+
+### 2. HERO PAGE VISUAL BLUEPRINT (EXACT WIREFRAME MATCH)
+- **Background Grid:** Deep space dark cinematic navy gradient theme.
+- **Watermark Text:** Giant background watermark title "HASINI NIKESALA" styled in ultra-bold, uppercase sans-serif typography with subtle low-contrast opacity, layered right behind the central portrait structure.
+- **The Central Portrait Layout & HOVER ANIMATION:** Center the profile picture asset (`profile.png`). By default, the image displays in a crisp black-and-white (grayscale) filter. When hovered, implement a smooth CSS transition (`transition: all 0.5s ease`) that brings back full vibrant colors, boosts contrast, and increases brightness slightly.
+- **Infinite Spinning Light Ring:** Apply an absolute CSS animation layer around this central image container to render a continuous, infinitely rotating linear-gradient border effect (a spinning neon energy ring using pure electric neon blue `#38bdf8`) with elegant glowing shadows.
+- **Callout Pointers:** Replicate the thin geometric pointer system paths branching left and right from the central ring container using neon blue, ending in crisp text tags reading "Software Development" (left side node) and "IT Undergraduate" (right side node).
+- **Navigation Navbar:** Modern minimalistic fixed top navigation bar with a slick glow-bordered "HN" brand identity node on the left, and a "Let's Talk" neon blue pill CTA button on the right edge. An animated floating "SCROLL" pointer indicator must sit pinned at the bottom-center anchor of this view.
+
+### 3. TECHNICAL ARSENAL GRID (EXACT LAYOUT MATCH WITH IMAGE_14ED07.JPG)
+Create a beautiful dashboard structured into 6 compartmentalized card modules exactly mapping the categories below. 
+- **STRICT DESIGN RULE FOR LOGOS:** Every single technology icon/logo inside these blocks must be housed in a neat circular container. Apply an absolute pseudo-element layer in CSS to create a continuous, infinitely rotating linear-gradient border effect (a spinning neon energy ring using electric blue `#38bdf8`) around the circle.
+- **Grid Categories & Skills:**
+  - *Category 1: Programming Languages* -> Java, PHP, Python, TypeScript, JavaScript, SQL, HTML5, CSS3
+  - *Category 2: Web Development* -> React.js, Angular, HTML5, CSS3, Tailwind CSS, JavaScript, Bootstrap
+  - *Category 3: Backend & Frameworks* -> Node.js, Express.js, Spring Boot, RESTful APIs, MVC Architecture, Hibernate, JPA
+  - *Category 4: Databases* -> MySQL, MongoDB
+  - *Category 5: UI/UX & Design* -> Figma, Illustrator, Photoshop
+  - *Category 6: IDEs & Tools* -> Git, GitHub, VS Code, Postman, IntelliJ IDEA, .NET, Linux OS, Maltego
+- **Visual Overlay Matrix:** Implement an active, vertical falling digital hacker cyan-blue matrix code trace simulator sequence processing along the absolute right section margin.
+
+### 4. PROJECTS DECK (WITH MANDATORY VISUAL IMAGES)
+Generate 6 distinct interactive floating glassmorphic cards (`backdrop-filter: blur`, responsive 3D parallax mouse-hover lift, and active box-shadow neon blue glows). **STRICT RULE:** Every project card must feature a descriptive modern placeholder background image cover relevant to its system context. Include a stylized repository icon button inside each card configuration opening to these exact locations (`target="_blank"`):
+1. *Watch Sale E-Commerce Web Application* -> https://github.com/hasineenikesala/watch-sale-system.git
+2. *Blood Bank and Donor Management System* -> https://github.com/hasineenikesala/blood-bank---donor-management-system.git
+3. *Study Buddy App* -> https://github.com/hasineenikesala/studybuddy-sri-lanka.git
+4. *IoT-Based Environment Control System* -> https://github.com/hasineenikesala/environment_control_system
+5. *Game Lobby System* -> https://github.com/hasineenikesala/game_lobby.git
+6. *Private University Web Application* -> https://github.com/hasineenikesala/privateuniproject.git
+
+### 5. HIGHLIGHTS CANVAS (TIMELINES & ACCURATE MATCH WITH IMAGE_14ED81.PNG)
+Render a creative, high-contrast block using the exact deep dark navy backgrounds and electric cyan blue text tones from the provided screenshots.
+- **Professional Experience Section:** Web Developer Intern at Devora (Pvt) Ltd. (Nov 2025 - Feb 2026).
+- **Certifications Grid Column:** Clean layout featuring custom check/arrow pointers for: 1. MERN Stack (IDET), 2. Web Dev & Python (UOM 2025), 3. Cybersecurity & Ethical Hacking (E-Nenasala), 4. AI/ML Engineer (SLIIT 2025), 5. Cloud Operations & AWS (IDET).
+- **Hackathons Grid Column:** Code Sprint 11 (IIT), Bitcode (RJT).
+- **Leadership Grid Column:** Coordinator - BITCODE Event (RJT), Committee Member - BITSA (RJT), Committee Member - Gavel Club (RJT).
+
+### 6. NEXT-LEVEL CONTACT HUB & INTERACTIVE FOOTER
+- **Contact Workspace Canvas:** Use a high-contrast crisp paper-texture splatter canvas background asset. Divided into a beautifully spaced split layout:
+  - *Left Column ("Connect With Me"):* Clean grid block holding 3D-rendered glossy tactile button cards for GitHub, LinkedIn, Facebook, and WhatsApp.
+  - *Right Column ("Send Message"):* A minimalist dark navy form container card holding sleek input slots (Your Name, Your Email, Subject, Your Message) with glowing electric neon blue borders upon active focus states. Send inputs via Fetch, and fade out the form to show a vivid green prompt reading "Message sent successfully!".
+- **Dynamic Interactive Footer Base:** Deep premium space obsidian blue theme.
+  - *Visual Central Element:* Include a giant bold, textured typography header bounding box that states exactly: "THANK'S FOR SCROLLING!"
+  - *Subtext Elements:* Centered underneath, show the text "CONNECT WITH ME TO CREATE SOMETHING AMAZING". Above the title block on the left, a neon cursive script graphic stating "Let's work together" with a geometric glowing neon blue arrow pointing to the title.
+  - *Mascot Layer:* On the bottom right corner, integrate a glowing cybernetic robot avatar assistant layer executing a continuous floating/bobbing up-and-down CSS animation loop with electric blue light traces.
+  - *Copyright Anchor:* Extremely clean simple bottom line stating: "© 2026 Hasini Nikesala. All Rights Reserved."
+
+### 7. CORE DEPLOYMENT SPECS
+Keep the build purely static frontend. Zip the compiled asset directory for immediate Vercel drop under the project identity 'hasini-nikesala'.
