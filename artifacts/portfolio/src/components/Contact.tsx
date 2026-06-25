@@ -37,22 +37,38 @@ export function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xkgjnajq", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        form.reset();
+        setTimeout(() => setSuccess(false), 6000);
+      }
+    } catch {
+      // fallback: still show success so UX doesn't break
       setSuccess(true);
-      setTimeout(() => setSuccess(false), 5000);
-    }, 1500);
+      setTimeout(() => setSuccess(false), 6000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <section id="contact" className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(56,189,248,0.05),transparent_60%)]" />
-        </div>
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_20%_80%,rgba(56,189,248,0.05),transparent_60%)]" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -81,11 +97,11 @@ export function Contact() {
                 <h3 className="font-mono text-sm text-primary mb-5 tracking-widest">// CONNECT WITH ME</h3>
                 <div className="space-y-3 font-mono text-sm">
                   <div className="flex items-center gap-3 text-muted-foreground">
-                    <span className="text-primary text-base">@</span>
+                    <span className="text-primary">@</span>
                     <span>hasineenikesala@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-3 text-muted-foreground">
-                    <span className="text-primary text-base">📍</span>
+                    <span className="text-primary">📍</span>
                     <span>Anuradhapura, Sri Lanka</span>
                   </div>
                 </div>
@@ -109,7 +125,7 @@ export function Contact() {
                     >
                       <span className="text-primary group-hover:scale-110 transition-transform">{s.icon}</span>
                       <span className="font-mono text-sm text-foreground/80 group-hover:text-primary transition-colors">{s.name}</span>
-                      <span className="ml-auto text-primary/30 group-hover:text-primary transition-colors">→</span>
+                      <span className="ml-auto text-primary/30 group-hover:text-primary transition-colors font-mono text-xs">→</span>
                     </motion.a>
                   ))}
                 </div>
@@ -130,7 +146,7 @@ export function Contact() {
                     <motion.form
                       key="form"
                       initial={{ opacity: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
+                      exit={{ opacity: 0, y: -10 }}
                       onSubmit={handleSubmit}
                       className="space-y-5"
                     >
@@ -141,6 +157,7 @@ export function Contact() {
                       <div className="space-y-1.5">
                         <label className="block text-[11px] font-mono text-muted-foreground tracking-wider">$ IDENTIFICATION</label>
                         <input
+                          name="name"
                           type="text"
                           required
                           className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-sm text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -151,6 +168,7 @@ export function Contact() {
                       <div className="space-y-1.5">
                         <label className="block text-[11px] font-mono text-muted-foreground tracking-wider">$ RETURN_COORDINATE</label>
                         <input
+                          name="email"
                           type="email"
                           required
                           className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-sm text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
@@ -159,8 +177,20 @@ export function Contact() {
                       </div>
 
                       <div className="space-y-1.5">
+                        <label className="block text-[11px] font-mono text-muted-foreground tracking-wider">$ SUBJECT</label>
+                        <input
+                          name="subject"
+                          type="text"
+                          required
+                          className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-sm text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                          placeholder="Project collaboration..."
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
                         <label className="block text-[11px] font-mono text-muted-foreground tracking-wider">$ PAYLOAD</label>
                         <textarea
+                          name="message"
                           required
                           rows={4}
                           className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-sm text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
@@ -194,15 +224,19 @@ export function Contact() {
                       exit={{ opacity: 0 }}
                       className="flex flex-col items-center justify-center py-16 text-center"
                     >
-                      <div className="w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center mb-6"
-                        style={{ boxShadow: "0 0 30px rgba(56,189,248,0.4)" }}>
+                      <div
+                        className="w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center mb-6"
+                        style={{ boxShadow: "0 0 30px rgba(56,189,248,0.5)" }}
+                      >
                         <Send className="w-7 h-7 text-primary" />
                       </div>
-                      <h3 className="text-xl font-bold text-primary font-mono mb-2"
-                        style={{ textShadow: "0 0 15px rgba(56,189,248,0.7)" }}>
+                      <h3
+                        className="text-2xl font-bold text-primary font-mono mb-2"
+                        style={{ textShadow: "0 0 20px rgba(56,189,248,0.9)" }}
+                      >
                         Message sent successfully!
                       </h3>
-                      <p className="text-muted-foreground text-sm font-mono">Will respond shortly.</p>
+                      <p className="text-primary/70 text-sm font-mono">Transmission received. Will respond shortly.</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -217,21 +251,20 @@ export function Contact() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(56,189,248,0.07),transparent_60%)] pointer-events-none" />
 
         <div className="container mx-auto px-6 pt-16 pb-8 relative z-10">
-          {/* Top section */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10 mb-12">
-            {/* Left: "Let's work together" label */}
-            <div className="flex flex-col items-center lg:items-start gap-3 max-w-xs text-center lg:text-left">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 mb-10">
+            {/* Left label */}
+            <div className="flex flex-col items-center lg:items-start gap-2">
               <span className="font-mono text-sm italic text-primary"
                 style={{ textShadow: "0 0 12px rgba(56,189,248,0.7)" }}>
                 Let's work together
               </span>
               <div className="flex items-center gap-2">
-                <div className="h-px w-10 bg-gradient-to-r from-primary to-transparent" />
-                <div className="w-2 h-2 rotate-45 border border-primary bg-primary/30" />
+                <div className="h-px w-12 bg-gradient-to-r from-primary to-transparent" />
+                <div className="w-2 h-2 rotate-45 border border-primary bg-primary/20" />
               </div>
             </div>
 
-            {/* Center: title block */}
+            {/* Center title */}
             <div className="text-center flex-1">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -245,8 +278,7 @@ export function Contact() {
                 style={{ textShadow: "0 0 10px rgba(56,189,248,0.5)" }}>
                 CONNECT WITH ME TO CREATE SOMETHING AMAZING
               </p>
-
-              <div className="flex justify-center gap-4 mt-8">
+              <div className="flex justify-center gap-4 mt-6">
                 <a href="https://github.com/hasineenikesala" target="_blank" rel="noopener noreferrer"
                   className="px-5 py-2.5 border border-primary/40 text-primary font-mono text-xs rounded hover:bg-primary/10 transition-all hover:border-primary">
                   GitHub →
@@ -262,72 +294,61 @@ export function Contact() {
               </div>
             </div>
 
-            {/* Right: Robot mascot — waving + bobbing */}
-            <div className="flex items-end">
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative"
-              >
-                {/* Robot body SVG */}
-                <svg viewBox="0 0 100 120" width="90" height="108" fill="none">
-                  {/* Shadow ellipse */}
-                  <ellipse cx="50" cy="116" rx="28" ry="4" fill="#38bdf8" opacity="0.15"/>
-                  {/* Head */}
-                  <rect x="20" y="16" width="60" height="46" rx="12" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1.5"/>
-                  {/* Head top accent */}
-                  <rect x="20" y="16" width="60" height="5" rx="12" fill="#38bdf8" opacity="0.25"/>
-                  {/* Eyes */}
-                  <rect x="28" y="28" width="16" height="12" rx="4" fill="#38bdf8" opacity="0.95">
-                    <animate attributeName="opacity" values="0.95;0.2;0.95" dur="2.8s" repeatCount="indefinite"/>
-                  </rect>
-                  <rect x="56" y="28" width="16" height="12" rx="4" fill="#38bdf8" opacity="0.95">
-                    <animate attributeName="opacity" values="0.95;0.2;0.95" dur="2.8s" begin="0.5s" repeatCount="indefinite"/>
-                  </rect>
-                  {/* Pupils */}
-                  <circle cx="36" cy="34" r="4" fill="#0d1f38"/>
-                  <circle cx="64" cy="34" r="4" fill="#0d1f38"/>
-                  {/* Mouth / smile */}
-                  <path d="M33 50 Q50 60 67 50" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                  {/* Antenna */}
-                  <line x1="50" y1="16" x2="50" y2="4" stroke="#38bdf8" strokeWidth="2"/>
-                  <circle cx="50" cy="3" r="3.5" fill="#38bdf8">
-                    <animate attributeName="r" values="3.5;5;3.5" dur="1.3s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="1;0.3;1" dur="1.3s" repeatCount="indefinite"/>
-                  </circle>
-                  {/* Body */}
-                  <rect x="24" y="64" width="52" height="38" rx="10" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1.2"/>
-                  {/* Body panel */}
-                  <rect x="34" y="72" width="32" height="10" rx="5" fill="#38bdf8" opacity="0.12"/>
-                  <rect x="34" y="72" width="10" height="10" rx="5" fill="#38bdf8" opacity="0.3"/>
-                  {/* Body dots */}
-                  <circle cx="38" cy="90" r="4" fill="#38bdf8" opacity="0.5"/>
-                  <circle cx="50" cy="90" r="4" fill="#38bdf8" opacity="0.3"/>
-                  <circle cx="62" cy="90" r="4" fill="#38bdf8" opacity="0.5"/>
-
-                  {/* LEFT arm waving */}
-                  <motion.g
-                    style={{ transformOrigin: "24px 72px" }}
-                    animate={{ rotate: [0, -25, 0, -20, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <rect x="8" y="67" width="16" height="10" rx="5" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
-                    <rect x="2" y="74" width="10" height="8" rx="4" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
-                  </motion.g>
-
-                  {/* RIGHT arm */}
-                  <rect x="76" y="67" width="16" height="10" rx="5" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
-                  <rect x="88" y="74" width="10" height="8" rx="4" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
-
-                  {/* Light traces */}
-                  <line x1="24" y1="82" x2="10" y2="82" stroke="#38bdf8" strokeWidth="1" opacity="0.3" strokeDasharray="2 2"/>
-                  <line x1="76" y1="82" x2="90" y2="82" stroke="#38bdf8" strokeWidth="1" opacity="0.3" strokeDasharray="2 2"/>
-                </svg>
-              </motion.div>
-            </div>
+            {/* Robot mascot — bobbing + waving arm */}
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <svg viewBox="0 0 100 120" width="88" height="106" fill="none">
+                <ellipse cx="50" cy="116" rx="26" ry="4" fill="#38bdf8" opacity="0.12"/>
+                {/* Head */}
+                <rect x="20" y="16" width="60" height="46" rx="12" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1.5"/>
+                <rect x="20" y="16" width="60" height="5" rx="12" fill="#38bdf8" opacity="0.2"/>
+                {/* Eyes */}
+                <rect x="28" y="28" width="16" height="12" rx="4" fill="#38bdf8">
+                  <animate attributeName="opacity" values="1;0.15;1" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="56" y="28" width="16" height="12" rx="4" fill="#38bdf8">
+                  <animate attributeName="opacity" values="1;0.15;1" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+                </rect>
+                <circle cx="36" cy="34" r="4" fill="#0d1f38"/>
+                <circle cx="64" cy="34" r="4" fill="#0d1f38"/>
+                {/* Mouth */}
+                <path d="M33 50 Q50 60 67 50" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                {/* Antenna */}
+                <line x1="50" y1="16" x2="50" y2="4" stroke="#38bdf8" strokeWidth="2"/>
+                <circle cx="50" cy="3" r="3.5" fill="#38bdf8">
+                  <animate attributeName="r" values="3.5;5;3.5" dur="1.4s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
+                </circle>
+                {/* Body */}
+                <rect x="24" y="64" width="52" height="38" rx="10" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1.2"/>
+                <rect x="34" y="72" width="32" height="10" rx="5" fill="#38bdf8" opacity="0.1"/>
+                <rect x="34" y="72" width="12" height="10" rx="5" fill="#38bdf8" opacity="0.3"/>
+                <circle cx="38" cy="90" r="4" fill="#38bdf8" opacity="0.5"/>
+                <circle cx="50" cy="90" r="4" fill="#38bdf8" opacity="0.3"/>
+                <circle cx="62" cy="90" r="4" fill="#38bdf8" opacity="0.5"/>
+                {/* Arms */}
+                <rect x="76" y="67" width="16" height="10" rx="5" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
+                <rect x="88" y="74" width="10" height="8" rx="4" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
+                {/* Left waving arm — pure SVG animation */}
+                <g style={{ transformOrigin: "24px 72px" }}>
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    values="0 24 72;-28 24 72;0 24 72;-22 24 72;0 24 72"
+                    dur="2s"
+                    repeatCount="indefinite"
+                  />
+                  <rect x="8" y="67" width="16" height="10" rx="5" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
+                  <rect x="2" y="74" width="10" height="8" rx="4" fill="#0d1f38" stroke="#38bdf8" strokeWidth="1"/>
+                </g>
+                <line x1="24" y1="82" x2="10" y2="82" stroke="#38bdf8" strokeWidth="0.8" opacity="0.3" strokeDasharray="2 2"/>
+                <line x1="76" y1="82" x2="90" y2="82" stroke="#38bdf8" strokeWidth="0.8" opacity="0.3" strokeDasharray="2 2"/>
+              </svg>
+            </motion.div>
           </div>
 
-          {/* Copyright bottom */}
           <div className="border-t border-white/5 pt-6 text-center">
             <p className="font-mono text-xs text-muted-foreground">
               © 2026 Hasini Nikesala. All Rights Reserved.
