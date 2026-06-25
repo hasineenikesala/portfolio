@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+:root {
+  --background: 222 47% 11%; /* #0f172a */
+  --foreground: 210 40% 98%; /* #f8fafc */
+
+  --card: 217 33% 17%; /* #1e293b */
+  --card-foreground: 210 40% 98%;
+  --card-border: 217 33% 25%;
+
+  --primary: 161 100% 44%; /* #00df9a */
+  --primary-foreground: 222 47% 11%;
+
+  --secondary: 201 100% 60%; /* #38bdf8 */
+  --secondary-foreground: 222 47% 11%;
+
+  --accent: 161 100% 44%;
+  --accent-foreground: 210 40% 98%;
+
+  --muted: 217 33% 25%;
+  --muted-foreground: 215 20.2% 65.1%;
+
+  --border: 217 33% 25%;
+  --input: 217 33% 25%;
+  --ring: 161 100% 44%;
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222 47% 11%; /* #0f172a */
+  --foreground: 210 40% 98%; /* #f8fafc */
+
+  --card: 217 33% 17%; /* #1e293b */
+  --card-foreground: 210 40% 98%;
+  --card-border: 217 33% 25%;
+
+  --primary: 161 100% 44%; /* #00df9a */
+  --primary-foreground: 222 47% 11%;
+
+  --secondary: 201 100% 60%; /* #38bdf8 */
+  --secondary-foreground: 222 47% 11%;
+
+  --accent: 161 100% 44%;
+  --accent-foreground: 210 40% 98%;
+
+  --muted: 217 33% 25%;
+  --muted-foreground: 215 20.2% 65.1%;
+
+  --border: 217 33% 25%;
+  --input: 217 33% 25%;
+  --ring: 161 100% 44%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-glow-primary {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4);
+  }
+  
+  .text-glow-secondary {
+    text-shadow: 0 0 10px hsl(var(--secondary) / 0.8), 0 0 20px hsl(var(--secondary) / 0.4);
+  }
+  
+  .box-glow-primary {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.2), 0 0 30px hsl(var(--primary) / 0.1);
+  }
+  
+  .glass-panel {
+    @apply bg-card/70 backdrop-blur-md border border-white/10;
+  }
+}
+
+@keyframes spinGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-glow {
+  animation: spinGlow 4s linear infinite;
+}
+
+.tilt-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale3d(1.02, 1.02, 1.02);
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+  border-color: hsl(var(--primary) / 0.5);
+}
